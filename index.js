@@ -66,6 +66,7 @@ showCart();
 
 function showCart(){
   let itemincart = "";
+  let  totalcost = 0 ;
   let cartDetails = document.getElementById("cartDetails") ;
   addto.myitems.forEach(function(item,index){
    itemincart += `<tr><td>${item.itemname}</td>
@@ -73,8 +74,13 @@ function showCart(){
    <td>${item.price}</td>
    <td>1</td>
    <td> <span class="btn btn-danger btn-sm"  onclick="deleteitem('${index}');" >Delete</span></td></tr>`;
-  console.log(index);
+    totalcost = totalcost +  parseInt(item.price); 
   })
+  if(totalcost != 0 ){
+    itemincart += `<tr><td colspan="2"><b>Total</b></td><td colspan="3">${ parseInt( totalcost)}</td></tr> ` ;
+
+  }
+ 
   cartDetails.innerHTML = itemincart;
 
 }
@@ -89,6 +95,5 @@ function addtocart(item,price,image,description){
                       price:price,
                       image:image});
     showCart();
-    let element = document.getElementById(id);
-    element.dispatchEvent(new Event("change")); 
+  alert(item + " succesfully Added!");
  }   
